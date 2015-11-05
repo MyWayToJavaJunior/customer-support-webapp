@@ -118,7 +118,7 @@ public class TicketServlet extends HttpServlet {
 	                writer.append(", ");
 	            }
 	            writer.append("<a href=\"tickets?action=download&ticketId=")
-	                .append(idString).append("&attachments=")
+	                .append(idString).append("&attachment=")
 	                .append(attachment.getName()).append("\">")
 	                .append(attachment.getName()).append("</a>");
 	        }
