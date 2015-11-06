@@ -3,7 +3,6 @@ package ru.dendevjv.customer_support;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -50,7 +49,7 @@ public class TicketServlet extends HttpServlet {
 		    break;
 		case "list":
 		default:
-		    listTickets(response);
+		    listTickets(request, response);
 		    break;
 		}
 	}
@@ -117,29 +116,11 @@ public class TicketServlet extends HttpServlet {
         stream.write(attachment.getContents());
     }
     
-    private void listTickets(HttpServletResponse response)
+    private void listTickets(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter writer = writeHeader(response);
-
-        writer.append("<h2>Tickets</h2>\r\n");
-        writer.append("<a href=\"tickets?action=create\">Create Ticket")
-                .append("</a><br/><br/>\r\n");
-
-        if (ticketDatabase.size() == 0) {
-            writer.append("<i>There are no tickets in the system.</i>\r\n");
-        } else {
-            for (int id : this.ticketDatabase.keySet()) {
-                String idString = Integer.toString(id);
-                Ticket ticket = ticketDatabase.get(id);
-                writer.append("Ticket #").append(idString)
-                        .append(": <a href=\"tickets?action=view&ticketId=")
-                        .append(idString).append("\">")
-                        .append(ticket.getSubject()).append("</a> (customer: ")
-                        .append(ticket.getCustomerName()).append(")<br/>\r\n");
-            }
-        }
-
-        writeFooter(writer);
+        request.setAttribute("ticketDatabase", ticketDatabase);
+        
+        request.getRequestDispatcher("/WEB-INF/jsp/view/listTickets.jsp").forward(request, response);
     }
     
     private void createTicket(HttpServletRequest request,
@@ -202,23 +183,4 @@ public class TicketServlet extends HttpServlet {
         }
     }
     
-    private PrintWriter writeHeader(HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
-
-        PrintWriter writer = response.getWriter();
-        writer.append("<!DOCTYPE html>\r\n")
-            .append("<html>\r\n")
-            .append("    <head>\r\n")
-            .append("        <title>Customer Support</title>\r\n")
-            .append("    </head>\r\n")
-            .append("    <body>\r\n");
-
-        return writer;
-    }
-    
-    private void writeFooter(PrintWriter writer) {
-        writer.append("    </body>\r\n").append("</html>\r\n");
-    }
 }
