@@ -1,1 +1,2 @@
+<%@ page import="ru.dendevjv.customer_support.TicketServlet, ru.dendevjv.customer_support.Attachment" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
