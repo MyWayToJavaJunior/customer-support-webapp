@@ -26,6 +26,8 @@ import javax.servlet.http.Part;
         maxRequestSize = 41_943_040L    // 40Mb
 )
 public class TicketServlet extends HttpServlet {
+    private static final String CHARACTER_ENCODING = "UTF-8";
+
     private static final long serialVersionUID = -4853043965984862902L;
     
     private volatile int ticketIdSequence = 1;
@@ -38,6 +40,7 @@ public class TicketServlet extends HttpServlet {
 	        return;
 	    }
 	    
+	    request.setCharacterEncoding(CHARACTER_ENCODING);
 		String action = request.getParameter("action");
 		if (action == null) {
 		    action = "list";
@@ -66,6 +69,7 @@ public class TicketServlet extends HttpServlet {
             return;
         }
         
+        request.setCharacterEncoding(CHARACTER_ENCODING);
         String action = request.getParameter("action");
         if (action == null) {
             action = "list";
