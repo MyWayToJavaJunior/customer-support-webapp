@@ -1,4 +1,3 @@
-<%@ page session="false" %>
 <%@ page import="ru.dendevjv.customer_support.Ticket, ru.dendevjv.customer_support.Attachment" %>
 <%
     String ticketId = request.getParameter("ticketId");

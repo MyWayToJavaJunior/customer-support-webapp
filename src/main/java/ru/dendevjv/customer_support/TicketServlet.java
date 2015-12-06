@@ -33,6 +33,11 @@ public class TicketServlet extends HttpServlet {
     private Map<Integer, Ticket> ticketDatabase = new LinkedHashMap<Integer, Ticket>();
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    if (request.getSession().getAttribute("username") == null) {
+	        response.sendRedirect("login");
+	        return;
+	    }
+	    
 		String action = request.getParameter("action");
 		if (action == null) {
 		    action = "list";
@@ -56,6 +61,11 @@ public class TicketServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("username") == null) {
+            response.sendRedirect("login");
+            return;
+        }
+        
         String action = request.getParameter("action");
         if (action == null) {
             action = "list";
@@ -126,7 +136,7 @@ public class TicketServlet extends HttpServlet {
     private void createTicket(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         Ticket ticket = new Ticket();
-        ticket.setCustomerName(request.getParameter("customerName"));
+        ticket.setCustomerName((String)request.getSession().getAttribute("username"));
         ticket.setSubject(request.getParameter("subject"));
         ticket.setBody(request.getParameter("body"));
 

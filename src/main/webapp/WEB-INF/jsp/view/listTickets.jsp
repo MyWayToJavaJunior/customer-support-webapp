@@ -1,4 +1,3 @@
-<%@ page session="false" %>
 <%@ page import="ru.dendevjv.customer_support.Ticket, java.util.Map" %>
 <%
     @SuppressWarnings("unchecked")

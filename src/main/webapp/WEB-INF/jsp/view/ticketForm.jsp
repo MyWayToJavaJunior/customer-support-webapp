@@ -1,4 +1,3 @@
-<%@ page session="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +10,7 @@
 
 <form method="post" action="tickets" enctype="multipart/form-data">
     <input type="hidden" name="action" value="create" />
-    Your name<br/>
-    <input type="text" name="customerName" /><br/><br/>
+    Your name: <%= session.getAttribute("username") %><br/>
     
     Subject<br/>
     <input type="text" name="subject" /><br/><br/>
