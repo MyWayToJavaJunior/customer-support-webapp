@@ -22,17 +22,20 @@ public class SessionListener implements HttpSessionListener, HttpSessionIdListen
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         log.info("Session " + se.getSession().getId() + " created");
+        SessionRegistry.addSession(se.getSession());
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         log.info("Session " + se.getSession().getId() + " destroyed");
+        SessionRegistry.removeSession(se.getSession());
     }
     
     /* HttpSessionIdListener method */
     @Override
-    public void sessionIdChanged(HttpSessionEvent event, String oldSessionId) {
-        log.info("Session " + oldSessionId + " changed to " + event.getSession().getId());
+    public void sessionIdChanged(HttpSessionEvent se, String oldSessionId) {
+        log.info("Session " + oldSessionId + " changed to " + se.getSession().getId());
+        SessionRegistry.updateSessionId(se.getSession(), oldSessionId);
     }
 
 //    private String date() {
