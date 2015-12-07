@@ -11,9 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @WebServlet(name = "loginServet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    
+    private static final Logger log = LogManager.getLogger();
 
     private static final Map<String, String> userDatabase = new Hashtable<String, String>();
 
@@ -27,6 +32,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        log.debug("entered doGet()");
         HttpSession session = req.getSession();
         if (req.getParameter("logout") != null) {
             session.invalidate();
@@ -46,6 +52,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        log.debug("entered doPost()");
         HttpSession session = req.getSession();
         if (session.getAttribute("username") != null) {
             resp.sendRedirect("tickets");
