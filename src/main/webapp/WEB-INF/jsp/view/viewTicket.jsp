@@ -10,6 +10,8 @@
 <title>Customer Support</title>
 </head>
 <body>
+
+    <a href="<c:url value="/login?logout" />">Logout</a><br />
     
     <h2>Ticket #<%= ticketId %>: <%= ticket.getSubject() %></h2>
     

@@ -28,7 +28,11 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session = req.getSession();
-        if (session.getAttribute("username") != null) { // Is user already
+        if (req.getParameter("logout") != null) {
+            session.invalidate();
+            resp.sendRedirect("login");
+            return;
+        } else if (session.getAttribute("username") != null) { // Is user already
                                                         // logged in?
             resp.sendRedirect("tickets");
             return;

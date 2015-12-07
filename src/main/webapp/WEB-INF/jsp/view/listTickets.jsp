@@ -11,6 +11,8 @@
 </head>
 <body>
 
+<a href="<c:url value="/login?logout" />">Logout</a><br />
+
 <h2>Tickets</h2>
 
 <a href="<c:url value="/tickets"><c:param name="action" value="create" /></c:url>">Create Ticket</a>

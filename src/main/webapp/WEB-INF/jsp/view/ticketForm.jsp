@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<a href="<c:url value="/login?logout" />">Logout</a><br />
+
 <h2>Create a Ticket</h2>
 
 <form method="post" action="tickets" enctype="multipart/form-data">
