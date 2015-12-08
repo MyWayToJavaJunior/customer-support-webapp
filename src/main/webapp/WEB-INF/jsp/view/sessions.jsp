@@ -13,7 +13,6 @@
     }
 %>
 <%
-    int numberOfSessions = (Integer) request.getAttribute("numberOfSessions");
     @SuppressWarnings("unchecked")
     List<HttpSession> sessionList = (List<HttpSession>) request.getAttribute("sessionList");
 %>
@@ -29,7 +28,7 @@
 
     <h2>Sessions</h2>
     
-    There are a total of <%= numberOfSessions %> active sessions in this application.<br /><br />
+    There are a total of ${numberOfSessions} active sessions in this application.<br /><br />
     
     <%
         long timeStamp = System.currentTimeMillis();

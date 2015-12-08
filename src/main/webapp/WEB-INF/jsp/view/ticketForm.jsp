@@ -12,7 +12,7 @@
 
 <form method="post" action="tickets" enctype="multipart/form-data">
     <input type="hidden" name="action" value="create" />
-    Your name: <%= session.getAttribute("username") %><br/>
+    Your name: ${sessionScope['username']}<br/>
     
     Subject<br/>
     <input type="text" name="subject" /><br/><br/>

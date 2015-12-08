@@ -94,6 +94,14 @@
             <version>${log4j.version}</version>
             <scope>runtime</scope>
         </dependency>
+        
+        <!-- Dependency for using Expression Language -->
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>3.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

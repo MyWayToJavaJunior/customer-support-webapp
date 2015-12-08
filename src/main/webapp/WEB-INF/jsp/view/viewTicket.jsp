@@ -1,6 +1,7 @@
 <%@ page import="ru.dendevjv.customer_support.Ticket, ru.dendevjv.customer_support.Attachment" %>
+<%-- @elvariable id="ticket" type="ru.dendevjv.customer_support.Ticket" --%>
 <%
-    String ticketId = request.getParameter("ticketId");
+    //String ticketId = request.getParameter("ticketId");
     Ticket ticket = (Ticket) request.getAttribute("ticket");
 %>
 <!DOCTYPE html>
@@ -13,11 +14,11 @@
 
     <a href="<c:url value="/login?logout" />">Logout</a><br />
     
-    <h2>Ticket #<%= ticketId %>: <%= ticket.getSubject() %></h2>
+    <h2>Ticket #${param['ticketId'] }: ${ticket.subject}</h2>
     
-    <i>Customer name - <%= ticket.getCustomerName() %></i><br/><br/>
+    <i>Customer name - ${ticket.customerName}</i><br/><br/>
     
-    <%= ticket.getBody() %><br/><br/>
+    ${ticket.body}<br/><br/>
     
     <% 
         if (ticket.getNumberOfAttachments() > 0) {
@@ -29,7 +30,7 @@
                 }
                 %><a href="<c:url value="/tickets">
                     <c:param name="action" value="download" />
-                    <c:param name="ticketId" value="<%= ticketId %>" />
+                    <c:param name="ticketId" value="${param['ticketId']}" />
                     <c:param name="attachment" value="<%= a.getName() %>" />
                 </c:url>"><%= a.getName() %></a><br/><%
             }
