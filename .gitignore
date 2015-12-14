@@ -1,6 +1,7 @@
 .*
 !.gitignore
 target/
+tmp/
 *.class
 Tmp.java
 TestSomething.java
