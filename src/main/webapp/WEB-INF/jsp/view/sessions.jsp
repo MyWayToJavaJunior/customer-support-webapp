@@ -1,47 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, javax.servlet.http.HttpSession" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        <%-- This line added for Eclipse --%>
+<%@ taglib prefix="template" tagdir="/WEB-INF/tags/template" %>         <%-- This line added for Eclipse --%>
+<%@ taglib prefix="fmtdates" uri="http://www.wrox.com/jsp/tld/wrox" %>  <%-- This line added for Eclipse --%>
+<%-- @elvariable id="timestamp" type="long" --%>
 <%-- @elvariable id="numberOfSessions" type="int" --%>
-<%!
-    private static String toString(long timeInterval) {
-        if (timeInterval < 1_000) {
-            return "less than one second";
-        } else if (timeInterval < 60_000) {
-            return (timeInterval / 1_000) + " seconds";
-        } else {
-            return "about " + (timeInterval / 60_000) + " minutes";
-        }
-    }
-%>
-<%
-    @SuppressWarnings("unchecked")
-    List<HttpSession> sessionList = (List<HttpSession>) request.getAttribute("sessionList");
-%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Customer Support</title>
-</head>
-<body>
+<%-- @elvariable id="sessionList" type="java.util.List<javax.servlet.http.HttpSession>" --%>
 
-    <a href="<c:url value="/login?logout" />">Logout</a><br />
-
-    <h2>Sessions</h2>
-    
+<template:basic htmlTitle="Active Sessions" bodyTitle="Active Sessions">
     There are a total of ${numberOfSessions} active sessions in this application.<br /><br />
     
-    <%
-        long timeStamp = System.currentTimeMillis();
-        for (HttpSession aSession : sessionList) {
-            out.print(aSession.getId() + " - " + aSession.getAttribute("username"));
-            if (aSession.getId().equals(session.getId())) {
-                out.print(" (you)");
-            }
-            out.print(" - last active " + toString(timeStamp - aSession.getLastAccessedTime()));
-            out.println(" ago<br />");
-        }
-    %>
-
-</body>
-</html>
+    <c:forEach items="${sessionList}" var="s">
+        <c:out value="${s.id} - ${s.getAttribute('username')}" />
+        <c:if test="${s.id ==  pageContext.session.id}">&nbsp;(you)</c:if>
+        &nbsp;- last active
+        ${fmtdates:timeIntervalToString(timestamp - s.lastAccessedTime)} ago<br />
+    </c:forEach>
+</template:basic>

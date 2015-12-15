@@ -1,16 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        <!-- This line added for Eclipse -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        <%-- This line added for Eclipse --%>
+<%@ taglib prefix="template" tagdir="/WEB-INF/tags/template" %>         <%-- This line added for Eclipse --%>
 <%-- @elvariable id="loginFailed" type="java.lang.Boolean" --%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Customer Support</title>
-</head>
-<body>
-
-    <h2>Login</h2>
+<template:loggedOut htmlTitle="Log In" bodyTitle="Log In">
     You must log in to access the customer support site.<br /><br />
     
     <c:if test="${loginFailed}">
@@ -24,6 +17,4 @@
         <input type="password" name="password" /><br /><br />
         <input type="submit" value="Log in" />
     </form>
-
-</body>
-</html>
+</template:loggedOut>

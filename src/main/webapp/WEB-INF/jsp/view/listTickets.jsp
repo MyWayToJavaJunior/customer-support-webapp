@@ -1,23 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        <!-- This line added for Eclipse -->
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  <!-- This line added for Eclipse -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        <%-- This line added for Eclipse --%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  <%-- This line added for Eclipse --%>
+<%@ taglib prefix="template" tagdir="/WEB-INF/tags/template" %>         <%-- This line added for Eclipse --%>
+<%@ taglib prefix="fmtdates" uri="http://www.wrox.com/jsp/tld/wrox" %>  <%-- This line added for Eclipse --%>
 <%-- @elvariable id="ticketDatabase" type="java.util.Map<java.lang.Integer, ru.dendevjv.customer_support.Ticket>" --%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Customer Support</title>
-</head>
-<body>
 
-    <a href="<c:url value="/login?logout" />">Logout</a><br />
-    
-    <h2>Tickets</h2>
-    
-    <a href="<c:url value="/tickets">
-        <c:param name="action" value="create" />
-    </c:url>">Create Ticket</a><br/>
-    <br/>
-
+<template:basic htmlTitle="Tickets" bodyTitle="Tickets">
     <c:choose>
         <c:when test="${fn:length(ticketDatabase) == 0}">
             <i>There are no tickets in the system.</i>
@@ -27,11 +14,10 @@
                 Ticket ${entry.key}: <a href="<c:url value="/tickets">
                     <c:param name="action" value="view" />
                     <c:param name="ticketId" value="${entry.key}" />
-                </c:url>"><c:out value="${entry.value.subject}" /></a>
-                (customer: <c:out value="${entry.value.customerName}" />)<br />
+                </c:url>"><c:out value="${fmtdates:abbreviateString(entry.value.subject, 60)}" /></a>
+                <c:out value="${entry.value.customerName}" /> created ticket
+                <fmtdates:formatDate value="${entry.value.dateCreated}" type="both" timeStyle="short" dateStyle="medium" /><br /><br />
             </c:forEach>
         </c:otherwise>
     </c:choose>
-
-</body>
-</html>
+</template:basic>

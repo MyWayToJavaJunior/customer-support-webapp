@@ -1,5 +1,6 @@
 package ru.dendevjv.customer_support;
 
+import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,6 +14,8 @@ public class Ticket {
 
     private Map<String, Attachment> attachments = new LinkedHashMap<>();
 
+    private OffsetDateTime dateCreated;
+    
     public String getCustomerName() {
         return customerName;
     }
@@ -51,5 +54,13 @@ public class Ticket {
 
     public int getNumberOfAttachments() {
         return this.attachments.size();
+    }
+
+    public OffsetDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(OffsetDateTime dateCreated) {
+        this.dateCreated = dateCreated;
     }
 }

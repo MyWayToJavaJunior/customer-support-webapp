@@ -5,7 +5,7 @@
 	<groupId>ru.dendevjv</groupId>
 	<artifactId>customer-support</artifactId>
 	<packaging>war</packaging>
-	<version>0.5.0-SNAPSHOT</version>
+	<version>0.6.0-SNAPSHOT</version>
 
 	<name>customer-support</name>
 	<url>http://maven.apache.org</url>
@@ -101,13 +101,21 @@
             <scope>runtime</scope>
         </dependency>
         
-        <!-- Dependency for using Expression Language -->
 		<dependency>
+        	<!-- Dependency for using Expression Language -->
 			<groupId>javax.el</groupId>
 			<artifactId>javax.el-api</artifactId>
 			<version>3.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+	  		<!-- Used in FormatDateTag.java -->
+	  		<groupId>org.apache.commons</groupId>
+	  		<artifactId>commons-lang3</artifactId>
+	  		<version>3.1</version>
+	  		<scope>compile</scope>
+	  	</dependency>
 	</dependencies>
 
 	<build>
