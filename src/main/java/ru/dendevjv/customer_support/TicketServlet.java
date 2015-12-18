@@ -42,11 +42,6 @@ public class TicketServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    log.debug("entered doGet()");
-	    if (request.getSession().getAttribute("username") == null) {
-	        response.sendRedirect("login");
-	        return;
-	    }
-	    
 	    request.setCharacterEncoding(CHARACTER_ENCODING);
 		String action = request.getParameter("action");
 		if (action == null) {

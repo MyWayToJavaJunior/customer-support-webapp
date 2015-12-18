@@ -1,0 +1,7 @@
+v.7 - Simplifying authentication with a filter
+v.6 - Replacing all Java code with custom JSP tags
+v.5 - Replacing some Java code with JSP tags
+v.4 - Replacing some Java code with EL
+v.3 - Applying Sessions: adding login, maintaining a list of active sessions.
+v.2 - Configuring JSP properties in the deployment descriptor, forwarding a request from a servlet to a JSP
+v.1 - Configuring the servlet for file uploads, accepting a file upload

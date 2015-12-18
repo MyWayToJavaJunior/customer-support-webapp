@@ -19,11 +19,6 @@ public class SessionListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        if (req.getSession().getAttribute("username") == null) {
-            resp.sendRedirect("login");
-            return;
-        }
-        
         req.setAttribute("numberOfSessions", SessionRegistry.getNumberOfSessions());
         req.setAttribute("sessionList", SessionRegistry.getAllSessions());
         req.setAttribute("timestamp", System.currentTimeMillis());

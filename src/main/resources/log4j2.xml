@@ -24,6 +24,9 @@
         <logger name="ru.dendevjv.customer_support" level="trace" additivity="false">
         	<appender-ref ref="Console" />
         </logger>
+        <logger name="ru.dendevjv.customer_support.AuthenticationFilter" level="debug" additivity="false">
+        	<appender-ref ref="Console" />
+        </logger>
         <logger name="ru.dendevjv" level="info" additivity="false">
             <appender-ref ref="CustSuppFileAppender" />
             <appender-ref ref="Console">
